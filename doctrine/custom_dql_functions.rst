@@ -68,5 +68,24 @@ In Symfony, you can register your custom DQL functions as follows:
                 ),
             ),
         ));
+        
+.. note::
+
+    In case the `entity_managers` were named explicitly, configuring the functions with the 
+    orm directly will trigger the exception `Unrecognized option "dql" under "doctrine.orm"`.
+    The `dql` configuration block should be nested under the entity manager.
+    
+.. code-block:: yaml
+
+    # app/config/config.yml
+    doctrine:
+        orm:
+            # ...
+            entity_managers:
+                example_manager:
+                    # Place your functions here
+                    dql:
+                        datetime_functions:
+                            test_datetime: AppBundle\DQL\DatetimeFunction
 
 .. _`DQL User Defined Functions`: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/cookbook/dql-user-defined-functions.html
